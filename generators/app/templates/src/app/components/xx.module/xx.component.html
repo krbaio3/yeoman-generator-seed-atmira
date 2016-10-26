@@ -1,0 +1,42 @@
+<div class="main">
+  <div class="clearfix">
+    <div class="col-l-1 col-m-3 col-brake">
+      <div class="fondoBloque col-padding-interno bordered">
+        <!-- Selector de tipo de documento -->
+        <ng-include src="'app/components/dataSearch.module/typeDocu.component/typeDocuView.html'"></ng-include>
+        <!-- <type-docu-template></type-docu-template> -->
+     </div>
+    </div>
+    <div ng-if="dataSearchCtrl.tipoCliente == 'cliente'" class="col-m-9 col-l-4">
+      <div class="clearfix fondoBloque col-padding-interno bordered">
+        <!-- Buscador por dni -->
+        <ng-include src="'app/components/dataSearch.module/nifSearch.component/nifSearchView.html'"></ng-include>
+        <!-- <nif-search></nif-search> -->
+        <!-- <nif-search-template></nif-search-template> -->
+      </div>
+    </div>
+
+    <div ng-if="dataSearchCtrl.tipoCliente == 'contrato'" class="col-m-9 col-l-4">
+      <div class="clearfix fondoBloque col-padding-interno bordered">
+        <!-- Buscador por IBAN -->
+        <!-- <iban-search-template></iban-search-template> -->
+        <ng-include src="'app/components/dataSearch.module/ibanSearch.component/ibanSearchView.html'"></ng-include>
+     </div>
+    </div>
+    <div ng-show="dataSearchCtrl.mostrarResultados==true" class="padding-top clearfix">
+      <div class="col-m-9 col-l-4 float-right">
+        <!-- Tabla con la lista de repartos -->
+        <!-- <list-deals-template lista></list-deals-template> -->
+          <ng-include src="'app/components/dataSearch.module/listDeals.component/listDealsView.html'"></ng-include>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="clearfix">
+    <!-- <footer-template footer="1"></footer-template> -->
+    <!-- <h1>data  => {{!dataSearchCtrl.mostrarResultados}}</h1> -->
+    <footer-template disable="!dataSearchCtrl.mostrarResultados"></footer-template>
+  </div>
+</footer>

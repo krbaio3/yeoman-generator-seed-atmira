@@ -1,0 +1,22 @@
+<div class="col-padding-right">
+  <label> <span class="text">Entidad:</span>
+    <!-- ¿Por qué no funciona el "scope" propio del componente ($ctrl) cuando le asigno el valor? Es porque es componente de componente?-->
+    <!-- <at-select placeholder="Selec. opción" list="$ctrl.tipoEntidadArray" ng-model="$ctrl.tipoEntidad" at-width="168px" class="clearfix"></at-select> -->
+    <at-select placeholder="Selec. opción" list="vm.tipoEntidadArray" ng-model="vm.tipoEntidad" at-width="168px" class="clearfix"></at-select>
+  </label>
+
+</div>
+<div class="col-padding-right">
+  <label for="document1">
+    <span class="text">Documento:</span>
+    <span bk-cl-document bk-id="document1" name="document1" ng-model="vm.document" bk-onsearch="vm.showTable"></span>
+  </label>
+
+</div>
+<div class="col-padding-right">
+  <div class="form-group">
+    <label for="campo-disabled"><span class="text">Nombre y apellidos / Razón social:</span>
+      <input id="campo-disabled" type="text" disabled="disabled" ng-model="vm.razonSocial" size="45" class="form-control input-disabled"/>
+    </label>
+  </div>
+</div>
