@@ -1,0 +1,148 @@
+// @1 VARIABLES (MANDATORY)
+// @2 THIRD PARTY
+// 	  @2.1 COMPASS (MANDATORY)
+//    @2.2 BOOTSTRAP (MANDATORY)
+// @3 BANKIA ICONS (OPTIONAL: add in case of your AAD app needs some font icons)
+// @4 BASIC AAD COMPONENT STYLES USED IN THIS REPO (MANDATORY ONLY: if your app uses AAD components. It loads BASIC component styles)
+// @5 NU-NEO-CORE STYLES (MANDATORY)
+// @6 NU-NEO ELEMENTS USED IN THIS REPO(OPTIONAL: add in case of your AAD app uses some HTML elements/samples from the nu-neo-ux repo)
+// @7 SPECIFIC APPLICATION AAD COMPONENT STYLES USED IN THIS REPO (OPTIONAL: SPECIFIC AAD component styles ONLY in a NEO app)
+// @8 OWNER APP STYLES (OPTIONAL: your specific app styles)
+
+
+// @1 UI-STYLES
+// -------------------------------------------------------------
+@import '../../../bower_components/bankia-ui-styles/variables';
+@import '../../../bower_components/bankia-ui-styles/mixins-custom';
+
+// @2 THIRD PARTY
+// -------------------------------------------------------------
+
+// @2.1 COMPASS
+/// -------------------------------------------------------------
+//@import 'compass';
+@import '../../../bower_components/compass-sass-mixins/lib/compass';
+
+
+// @2.1 NORMALIZE & BOOTSTRAP
+// -------------------------------------------------------------
+@import '../../../bower_components/nu-neo-styles/dist/sass/vendor/all';
+
+// @3 BANKIA ICONS
+// -------------------------------------------------------------
+@import '../../../bower_components/bankia-ui-styles/fonts';
+@import '../../../bower_components/bankia-ui-styles/bk-icons';
+
+// @4 BASIC AAD COMPONENT STYLES USED IN THIS REPO
+// --------------------------------------------------
+@import '../../../bower_components/bankia-ui-button/src/scss/bk-button';
+@import '../../../bower_components/bankia-ui-checkbox/src/scss/bk-checkbox';
+@import '../../../bower_components/bankia-ui-combo/dist/scss/bk-combo';
+@import '../../../bower_components/bankia-ui-date/src/scss/bk-date';
+@import '../../../bower_components/bankia-ui-radio/src/scss/bk-radio';
+@import '../../../bower_components/bankia-ui-tasklist/dist/scss/bk-tasklist';
+@import '../../../bower_components/bankia-cl-ui-document/dist/scss/bk-cl-document';
+@import '../../../bower_components/bankia-cl-ui-ccc/dist/scss/bk-cl-ccc';
+@import '../../../bower_components/bankia-cl-ui-iban/dist/scss/bk-cl-iban';
+@import '../../../bower_components/bankia-cl-ui-multiproduct/dist/scss/bk-multiproduct';
+@import '../../../bower_components/bankia-cl-ui-product/dist/scss/bk-cl-product';
+
+// @5 NU-NEO-CORE STYLES
+// -------------------------------------------------------------
+@import '../../../bower_components/nu-neo-styles/dist/sass/modules/all';
+
+// @6 NU-NEO-ELEMENTS USED IN THIS REPO
+// -------------------------------------------------------------
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-box';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-button';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-combo';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-element-exchange';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-general-panel';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-hierarchic-combo';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-legend';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-pagination';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-tab';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-table';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/pdf-viewer';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-check';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-compound-icons';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-form';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-link';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-radio';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-text-input';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-title';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/uib-modal';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/uib-tooltip';
+
+// @7 SPECIFIC APPLICATION AAD COMPONENT STYLES USED IN THIS REPO
+// -------------------------------------------------------------
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/components/bk-date';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/components/bk-statebutton';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/components/bk-tasklist';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/components/bk-loading';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/components/bk-message';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/components/bk-snackbar';
+
+// @7.5 Gestor Documental
+// -------------------------------------------------------------
+/*@import '../../../bower_components/bankia-ui-tabletree/src/scss/bk-tabletree';
+@import '../../../bower_components/bankia-ui-inyeccion-documental/dist/styles/inyeccion-documental';
+@import '../../../bower_components/bankia-ui-styles/normalize';
+@import '../../../bower_components/nu-neo-styles/dist/sass/modules/scafolding';
+@import '../../../bower_components/nu-neo-styles/dist/sass/modules/variables';
+@import '../../../bower_components/nu-neo-styles/dist/sass/modules/neo-grid-1920';
+@import '../../../bower_components/nu-neo-styles/dist/sass/modules/mixins';
+@import '../../../bower_components/bankia-ui-select/src/scss/bk-select';
+@import '../../../bower_components/bankia-ui-message/src/scss/bk-message';
+@import '../../../bower_components/bankia-ui-loading/src/scss/bk-loading';
+@import '../../../bower_components/bankia-ui-tablescroll/dist/scss/bk-tablescroll';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-box';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-layer';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-legend';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-tab';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-link';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-title';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-form';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-check';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-text-input';
+@import '../../../bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-radio';
+*/
+// @8 OWNER APP STYLES
+// -------------------------------------------------------------
+
+// ! Don't remove following 2 lines and the move the order
+// Inyect scss from Bower with wiredep SCSS
+
+// bower:scss
+// endbower
+
+
+// ! Don't remove following 2 lines and the move the order
+// Inyect scss from Bower
+
+// injectorBowerSCSS
+// endinjectorBowerSCSS
+
+
+// ! Don't remove following 2 lines and the move the order
+// Inyect scss from Components
+
+// injectorSCSS
+@import '../../../src/app/assets/css/bk-cl-document-neo.scss';
+@import '../../../src/app/assets/css/bk-cl-multiproduct-neo.scss';
+@import '../../../src/app/assets/css/main.scss';
+@import '../../../src/app/assets/css/styles-bankia.scss';
+@import '../../../src/app/components/dataSearch.module/dataSearch.component.scss';
+@import '../../../src/app/components/historyDeals.module/historyDeals.component.scss';
+@import '../../../src/app/components/searchResults.module/searchResults.component.scss';
+@import '../../../src/app/components/dataSearch.module/ibanSearch.component/ibanSearchView.scss';
+@import '../../../src/app/components/dataSearch.module/listDeals.component/listDealsView.scss';
+@import '../../../src/app/components/dataSearch.module/nifSearch.component/nifSearchView.scss';
+@import '../../../src/app/components/dataSearch.module/typeDocu.component/typeDocuView.scss';
+@import '../../../src/app/components/historyDeals.module/tabHistoryDeals.component/tabHistoryDealsView.scss';
+@import '../../../src/app/components/searchResults.module/dealDestFunds.component/dealDestFundsView.scss';
+@import '../../../src/app/components/searchResults.module/docuInjection.component/docuInjectionView.scss';
+@import '../../../src/app/components/searchResults.module/dynamicDestFunds.component/dynamicDestFundsView.scss';
+@import '../../../src/app/components/shared.module/nifSearch.component/nifSearch.component.scss';
+@import '../../../src/app/components/shared.module/footer/footer.scss';
+// endinjectorSCSS

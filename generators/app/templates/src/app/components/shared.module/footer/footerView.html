@@ -1,0 +1,62 @@
+<div class="negro" ng-switch on={{footer}}>
+  <!-- <h2>El footer es {{footer}}</h2> -->
+
+
+  <div ng-switch-when="1">
+    <div class="bk-footerbar"><a ui-sref="historyDeals" class="historico">Historico de repartos</a>
+      <ul class="bk-buttonbar">
+        <li>
+          <div bk-button="bk-button" type="button" bk-type="=" ui-sref="dataSearch">Dar de baja</div>
+        </li>
+        <li>
+          <div bk-button="bk-button" type="button" bk-type="-" class="bk-with-literal"
+            ui-sref="dataSearch"><span class="bki-error"></span><span class="text">Abandonar</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div ng-switch-when="2">
+    <div class="bk-footerbar">
+      <ul class="bk-buttonbar">
+        <li>
+        <div bk-button="bk-button" type="button" bk-type="-" ui-sref="dataSearch" class="bk-with-literal"><span class="bki-error"></span><span class="text">Abandonar</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div ng-switch-when="3">
+    <div class="bk-footerbar"><a ui-sref="historyDeals" class="historico">Historico de repartos</a>
+      <ul class="bk-buttonbar">
+        <li>
+          <div bk-button="bk-button" type="button" bk-type="-" class="bk-with-literal" ui-sref="dataSearch"><span class="bki-error"></span><span class="text">Abandonar</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div ng-switch-default>
+    <div class="bk-footerbar">
+      <ul class="bk-buttonbar">
+        <li>
+          <!-- <h2>disable es ==> {{disable}}</h2> -->
+          <div bk-button="bk-button" type="button" bk-type="+" ui-sref="searchResults" ng-disabled=disable class="bk-with-literal">
+            <span class="bki-success"></span>
+            <span class="text">Aceptar</span>
+          </div>
+        </li>
+        <li>
+        <!-- Revisar el Abandonar -->
+          <div bk-button="bk-button" type="button" bk-type="-" class="bk-with-literal" ui-sref="dataSearch">
+            <span class="bki-error"></span>
+            <span class="text">Abandonar</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
