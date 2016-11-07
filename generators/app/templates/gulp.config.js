@@ -9,20 +9,16 @@ module.exports = function() {
     var report = './report/';
     var root = './';
     var temp = './.tmp/';
-    //var dist = './dist/';
-    //var wiredep = require('wiredep');
-    //var bowerFiles = wiredep({devDependencies: true})['js'];
+    var specRunnerFile = 'specs.html';
+    var wiredep = require('wiredep');
+    var bowerFiles = wiredep({
+        devDependencies: true
+    })['js'];
     var bower = {
         json: require('./bower.json'),
         directory: './bower_components/'
-        //ignorePath: '../..'
     };
-
-    var modules = {
-        'dataSearch': [],
-        'historyDeals': [],
-        'searchResults': ['']
-    };
+    var nodeModules = 'node_modules';
 
     var config = {
         /**
@@ -31,14 +27,12 @@ module.exports = function() {
         // all javascript that we want to vet
         alljs: [
             './src/**/*.js'
-            //,'./*.js'
         ],
         build: './dist/',
         app: app,
         css: app + 'sass/main.css',
         fonts: bower.directory + 'font-awesome/fonts/**/*.*',
         html: app + '**/*.html',
-        //images: assets + '/img/**/*.{gif,jpeg,jpeg,png,svg}',
         images: assets + '/img/**/*',
         index: src + 'index.html',
         // app js, with no specs
@@ -48,17 +42,10 @@ module.exports = function() {
             '!' + components + '**/*.spec.js'
         ],
         mainJs: src + 'main.js',
-        //jsOrder: [
-          //  '**/app.module.js',
-            //'**/app.config.js',
-          //  '**/app.routes.js',
-          //  '**/*.module.js',
-          //  '**/*.js'
-        //],
         jsOrder: [
-          '**/app.module.js',
-          '**/*.module.js',
-          '**/*.js'
+            '**/app.module.js',
+            '**/*.module.js',
+            '**/*.js'
         ],
         sass: app + 'sass/main.scss',
         sassFolder: sass,
@@ -69,7 +56,7 @@ module.exports = function() {
             bower.directory + 'angular-mocks/angular-mocks.js',
             app + 'stubs/**/*.js'
         ],
-        temp: temp,
+        //temp: temp,
 
         /**
          * optimized files
@@ -112,6 +99,32 @@ module.exports = function() {
             './bower.json'
         ],
         /**
+         * specs.html, our HTML spec runner
+         */
+        specRunner: src + specRunnerFile,
+        specRunnerFile: specRunnerFile,
+
+        /**
+         * The sequence of the injections into specs.html:
+         *  1 testlibraries
+         *      mocha setup
+         *  2 bower
+         *  3 js
+         *  4 spechelpers
+         *  5 specs
+         *  6 templates
+         */
+        testlibraries: [
+            nodeModules + '/jasmine/bin/jasmine.js',
+            //nodeModules + '/mocha/mocha.js',
+            nodeModules + '/chai/chai.js',
+            nodeModules + '/sinon-chai/lib/sinon-chai.js'
+        ],
+        specHelpers: [src + 'test-helpers/*.js'],
+        specs: [app + '**/*.spec.js'],
+        serverIntegrationSpecs: [src + '/tests/server-integration/**/*.spec.js'],
+
+        /**
          * Node settings
          */
         defaultPort: '8001'
@@ -127,50 +140,6 @@ module.exports = function() {
             ignorePath: config.bower.ignorePath
         };
         return options;
-    };
-
-    config.getOrderInyectorBowerSCSS = function () {
-
-        var order = [
-          '/bower_components/bankia-ui-styles/variables.scss',
-          '/bower_components/bankia-ui-styles/mixins-custom.scss',
-          '/bower_components/nu-neo-styles/dist/sass/vendor/all.scss',
-          '/bower_components/bankia-ui-styles/fonts.scss',
-          '/bower_components/bankia-ui-styles/bk-icons.scss',
-          '/bower_components/bankia-ui-button/src/scss/bk-button.scss',
-          '/bower_components/bankia-ui-checkbox/src/scss/bk-checkbox.scss',
-          '/bower_components/bankia-ui-combo/src/scss/bk-combo.scss',
-          '/bower_components/bankia-ui-date/src/scss/bk-date.scss',
-          '/bower_components/bankia-ui-radio/src/scss/bk-radio.scss',
-          '/bower_components/nu-neo-styles/dist/sass/modules/all.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-box.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-button.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-combo.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-element-exchange.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-general-panel.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-hierarchic-combo.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-legend.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-pagination.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-tab.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/bk-table.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/pdf-viewer.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-check.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-compound-icons.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-form.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-link.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-radio.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-text-input.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/simple/bk-title.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/uib-modal.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/elements/complex/uib-tooltip.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/components/bk-date.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/components/bk-statebutton.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/components/bk-tasklist.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/components/bk-loading.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/components/bk-message.scss',
-          '/bower_components/nu-neo-styles/dist/sass/partials/components/bk-snackbar.scss'];
-
-        return order;
     };
 
     /**

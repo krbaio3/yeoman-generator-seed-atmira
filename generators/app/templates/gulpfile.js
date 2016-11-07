@@ -5,37 +5,27 @@ var $ = require('gulp-load-plugins')({
     lazy: true
 });
 var open = require('gulp-open');
+var KarmaServer = require('karma').Server;
 var browserSync = require('browser-sync').create();
-var useref = require('gulp-useref');
-var gulpIf = require('gulp-if');
-var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
 var cssnano = require('gulp-cssnano');
-//var inject          = require('gulp-inject');
+var cleanCSS = require('gulp-clean-css');
 var plumber = require('gulp-plumber');
 var watch = require('gulp-watch');
 var scsslint = require('gulp-scss-lint');
-//var print           = require('gulp-print');
-var cleanCSS = require('gulp-clean-css');
 var minify = require('gulp-minify');
 var angularFilesort = require('gulp-angular-filesort');
-var sass = require('gulp-sass');
+//var sass = require('gulp-sass');
 var order = require('gulp-order');
 //var debug           = require('gulp-debug');
 var sourcemaps = require('gulp-sourcemaps');
-var bowerFiles = require('main-bower-files');
-var copy = require('gulp-copy');
-//injecta múltiples streams diferentes
-var es = require('event-stream');
-var connect = require('gulp-connect');
 var _ = require('gulp-lodash');
 var fileExists = require('file-exists');
-
+var args = require('yargs').argv;
 var path = require('./gulp.config')();
-var stripDebug = require('gulp-strip-debug');
+//var stripDebug = require('gulp-strip-debug');
 //Limpia capeta de construccion
 var del = require('del');
-
 //Inyeccion de Bower
 var wiredep = require('wiredep').stream;
 //Transforma SASS a CSS
@@ -88,15 +78,10 @@ gulp.task('build', function(done) {
     runSequence('wiredep', 'build-sass', 'inject', done);
 });
 
-//gulp.task('build', ['clean', 'pug', 'compass', 'scripts', 'copy:bower-components', 'copy:fonts', 'copy:images', 'copy:data', 'copy:pdf-samples']);
-
 // Static Server + watching scss/html files
 gulp.task('server', function() {
     browserSync.init({
         logLevel: 'debug',
-        //startPath:'./src',
-        //Puede escuchar(watch) varios archivos con los que trabajamos y recargarlo automaticamente, varios archivos, array.
-        //files: "dist/**/*.*",
         server: {
             baseDir: 'src',
             index: 'index.html',
@@ -104,23 +89,14 @@ gulp.task('server', function() {
                 '/bower_components': 'bower_components'
             }
         },
-        //defaultFile: 'src/index.html',
         browserSync: true,
         port: WEB_PORT,
-        //browser: 'google chromium',
         open: 'local'
     });
 
-    //gulp.src('index.html', {cwd: './src'})
-    //  .pipe(open({app: 'chrome', uri: 'localhost:9898'}));
-
     //sass scripts watch
     gulp.watch(['src/app/**/*.scss'], ['build-sass'], function() {
-        //runSequence('inject:scss', 'sass');
-        //browserSync.reload();
-        //console.log('Ha recargado SCSS');
         log('Ha recargado SCSS');
-        //done();
     });
 
     //javascript watch. Angular 1.5
@@ -132,14 +108,11 @@ gulp.task('server', function() {
 
     gulp.watch(path.alljs, function(done) {
         browserSync.reload();
-        //console.log('Ha recargado JS');
         log('Ha recargado JS');
     });
 
     //html watch
     gulp.watch('./src/app/**/*.html').on('change', browserSync.reload);
-    //console.log('Ha recargado!!');
-    //log('Ha recargado!!');
 });
 
 /***  BOWER ***/
@@ -296,18 +269,13 @@ gulp.task('sass', function() {
             verbose: true
         }))
         .pipe(plumber({
-            errorHandler: function( /*err*/ ) {
+            errorHandler: function(err) {
                 this.emit('end');
+                log('ERROR ==> ' + err);
             }
         }))
         .pipe(sourcemaps.init())
-        //.pipe(compass({
-          //  style: 'expanded',
-          //  comments: 'description',
-          //  css: path.sassFolder,
-          //  sass: path.sassFolder
-        //}))
-        .pipe(sass({ compass: true, sourcemap: true, style: 'compressed' }).on('error', sass.logError))
+        .pipe($.sass().on('error', $.sass.logError))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.sassFolder))
         //.pipe(browserSync.stream())
@@ -334,11 +302,6 @@ gulp.task('inject', function() {
 
     var injectStyles = gulp.src(path.css);
 
-
-    //var injectScripts = gulp.src(path.alljs);
-    //.pipe(order(path.jsOrder))
-    //.pipe(angularFilesort());
-
     var wiredepOptions = path.getWiredepDefaultOptions();
 
     var injectOptions = {
@@ -356,8 +319,6 @@ gulp.task('inject', function() {
             verbose: true
         }))
         .pipe(plumber())
-        //.pipe($.inject(injectStyles, injectOptions))
-        //.pipe(gulp.dest(path.source))
         .pipe($.inject(injectScripts, injectOptions))
         .pipe(gulp.dest(path.source))
         .pipe($.inject(injectStyles, injectOptions))
@@ -402,7 +363,7 @@ gulp.task('concatMain', function() {
 gulp.task('inject:js', function() {
 
     var injectScripts = gulp.src(path.alljs)
-        .pipe(angularFilesort()).on('error', options.errorHandler('AngularFilesort'));
+        .pipe(angularFilesort()).on('error', this.errorHandler('AngularFilesort'));
     var wiredepOptions = path.getWiredepDefaultOptions();
 
     var injectOptions = {
@@ -451,11 +412,11 @@ gulp.task('jscs', function() {
             verbose: true
         }))
         .pipe(plumber())
-        .pipe(jscs({
+        .pipe($.jscs({
             fix: true
         }))
-        .pipe(jscs.reporter())
-        .pipe(jscs.reporter('fail'));
+        .pipe($.jscs.reporter())
+        .pipe($.jscs.reporter('fail'));
     //.pipe(gulp.dest('./dist'));
 });
 
@@ -480,9 +441,6 @@ gulp.task('vet', function() {
         .pipe($.jscs.reporter('fail'));
 });
 
-/****
-            FIN TAREAS
-******/
 
 /*******
             ASSETS
@@ -514,7 +472,6 @@ gulp.task('inject:css', ['css'], function() {
     var injectStyles = gulp.src(['src/app/**/*.scss']);
 
     var injectOptions = {
-        //addRootSlash: false
         relative: true
     };
 
@@ -530,7 +487,7 @@ gulp.task('inject:css', ['css'], function() {
                 this.emit('end');
             }
         })).pipe($.inject(injectStyles, injectOptions))
-            .pipe(gulp.dest(path.source))
+        .pipe(gulp.dest(path.source))
         .pipe(browserSync.stream());
 });
 
@@ -562,17 +519,23 @@ gulp.task('css', function(cb) {
 
     return sass
         .pipe($.debug({
-                verbose: true
-            }))
-            .pipe(plumber({
-                errorHandler: function(err) {
-                    //log(err);
-                    this.emit('end');
-                }
-            }))
+            verbose: true
+        }))
+        .pipe(plumber({
+            errorHandler: function(err) {
+                //log(err);
+                this.emit('end');
+            }
+        }))
         .pipe(sourcemaps.init())
-        .pipe(transform)
+        .pipe(transform2)
         .pipe(sourcemaps.write())
         .pipe(destSass)
         .pipe(browserSync.stream());
 });
+
+/****
+            FIN TAREAS
+******/
+
+module.exports = gulp;
