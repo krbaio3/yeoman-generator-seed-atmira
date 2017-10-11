@@ -1,13 +1,13 @@
-# generator-seed-bk-atmira [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Generador de Atmira para proyectos Bankia
+# generator-seed-atmira [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+> Generador de Atmira para proyectos Front
 
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and generator-seed-bk-atmira using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+First, install [Yeoman](http://yeoman.io) and generator-seed-atmira using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g generator-seed-bk-atmira
+npm install -g generator-seed-atmira
 ```
 
 Then generate your new project:
@@ -29,10 +29,10 @@ MIT © [Jorge Carballo](https://github.com/krbaio3/seed-bk-atmira.git)
 
 
 [npm-image]: https://badge.fury.io/js/generator-seed-bk-atmira.svg
-[npm-url]: https://npmjs.org/package/generator-seed-bk-atmira
-[travis-image]: https://travis-ci.org/KrBaIO3/generator-seed-bk-atmira.svg?branch=master
-[travis-url]: https://travis-ci.org/KrBaIO3/generator-seed-bk-atmira
-[daviddm-image]: https://david-dm.org/KrBaIO3/generator-seed-bk-atmira.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/KrBaIO3/generator-seed-bk-atmira
-[coveralls-image]: https://coveralls.io/repos/KrBaIO3/generator-seed-bk-atmira/badge.svg
-[coveralls-url]: https://coveralls.io/r/KrBaIO3/generator-seed-bk-atmira
+[npm-url]: https://npmjs.org/package/generator-seed-atmira
+[travis-image]: https://travis-ci.org/KrBaIO3/generator-seed-atmira.svg?branch=master
+[travis-url]: https://travis-ci.org/KrBaIO3/generator-seed-atmira
+[daviddm-image]: https://david-dm.org/KrBaIO3/generator-seed-atmira.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/KrBaIO3/generator-seed-atmira
+[coveralls-image]: https://coveralls.io/repos/KrBaIO3/generator-seed-atmira/badge.svg
+[coveralls-url]: https://coveralls.io/r/KrBaIO3/generator-seed-atmira
